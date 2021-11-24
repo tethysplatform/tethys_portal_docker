@@ -1,0 +1,20 @@
+[submodule "tethysapp-bokeh_tutorial"]
+	path = tethysapp-bokeh_tutorial
+	url = https://github.com/tethysplatform/tethysapp-bokeh_tutorial
+	branch = master
+[submodule "tethysapp-dam_inventory"]
+	path = tethysapp-dam_inventory
+	url = https://github.com/tethysplatform/tethysapp-dam_inventory
+	branch = advanced-solution
+[submodule "tethysapp-earth_engine"]
+	path = tethysapp-earth_engine
+	url = https://github.com/tethysplatform/tethysapp-earth_engine
+	branch = prepare-publish-solution
+[submodule "tethysapp-postgis_app"]
+	path = tethysapp-postgis_app
+	url = https://github.com/tethysplatform/tethysapp-postgis_app
+	branch = master
+[submodule "tethysapp-thredds_tutorial"]
+	path = tethysapp-thredds_tutorial
+	url = https://github.com/tethysplatform/tethysapp-thredds_tutorial
+	branch = plot-at-location-solution
