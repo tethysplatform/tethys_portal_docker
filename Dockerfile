@@ -50,6 +50,11 @@ RUN /bin/bash -c "cd ${TETHYS_HOME}/apps/tethysapp-thredds_tutorial && \
     . ${CONDA_HOME}/bin/activate tethys && \
     tethys install --no-db-sync"
 
+##################
+# ADD SALT FILES #
+##################
+COPY salt/ /srv/salt/
+
 #########
 # PORTS #
 #########
