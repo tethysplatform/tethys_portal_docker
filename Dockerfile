@@ -1,4 +1,4 @@
-FROM tethysplatform/tethys-core:master
+FROM tethysplatform/tethys-core:3.4.1
 
 ###############
 # ENVIRONMENT #
