@@ -1,4 +1,4 @@
-FROM tethysplatform/tethys-core:master
+FROM tethysplatform/tethys-core:latest
 
 ###############
 # ENVIRONMENT #
@@ -8,9 +8,13 @@ ENV DAM_INVENTORY_MAX_DAMS="50" \
     EARTH_ENGINE_SERVICE_ACCOUNT_EMAIL="" \
     THREDDS_TUTORIAL_TDS_USERNAME="admin" \
     THREDDS_TUTORIAL_TDS_PASSWORD="CHANGEME!" \
-    THREDDS_TUTORIAL_TDS_PROTOCOL="http" \
-    THREDDS_TUTORIAL_TDS_HOST="localhost" \
-    THREDDS_TUTORIAL_TDS_PORT="8080"
+    THREDDS_TUTORIAL_TDS_CATALOG="/thredds/catalog/catalog.xml" \
+    THREDDS_TUTORIAL_TDS_PRIVATE_PROTOCOL="http" \
+    THREDDS_TUTORIAL_TDS_PRIVATE_HOST="localhost" \
+    THREDDS_TUTORIAL_TDS_PRIVATE_PORT="8080" \
+    THREDDS_TUTORIAL_TDS_PUBLIC_PROTOCOL="http" \
+    THREDDS_TUTORIAL_TDS_PUBLIC_HOST="localhost" \
+    THREDDS_TUTORIAL_TDS_PUBLIC_PORT="8080"
 
 #############
 # ADD FILES #
@@ -29,26 +33,23 @@ COPY images/ /tmp/custom_theme/images/
 ###########
 # INSTALL #
 ###########
+# Activate tethys conda environment during build
+ARG MAMBA_DOCKERFILE_ACTIVATE=1
 # Bokeh App
-RUN /bin/bash -c "cd ${TETHYS_HOME}/apps/tethysapp-bokeh_tutorial && \
-    . ${CONDA_HOME}/bin/activate tethys && \
-    tethys install --no-db-sync"
+RUN cd ${TETHYS_HOME}/apps/tethysapp-bokeh_tutorial && \
+    tethys install --no-db-sync
 # Dam Inventory
-RUN /bin/bash -c "cd ${TETHYS_HOME}/apps/tethysapp-dam_inventory && \
-    . ${CONDA_HOME}/bin/activate tethys && \
-    tethys install --no-db-sync"
+RUN cd ${TETHYS_HOME}/apps/tethysapp-dam_inventory && \
+    tethys install --no-db-sync
 # Earth Engine
-RUN /bin/bash -c "cd ${TETHYS_HOME}/apps/tethysapp-earth_engine && \
-    . ${CONDA_HOME}/bin/activate tethys && \
-    tethys install --no-db-sync"
+RUN cd ${TETHYS_HOME}/apps/tethysapp-earth_engine && \
+    tethys install --no-db-sync
 # PostGIS App
-RUN /bin/bash -c "cd ${TETHYS_HOME}/apps/tethysapp-postgis_app && \
-    . ${CONDA_HOME}/bin/activate tethys && \
-    tethys install --no-db-sync"
+RUN cd ${TETHYS_HOME}/apps/tethysapp-postgis_app && \
+    tethys install --no-db-sync
 # THREDDS Tutorial
-RUN /bin/bash -c "cd ${TETHYS_HOME}/apps/tethysapp-thredds_tutorial && \
-    . ${CONDA_HOME}/bin/activate tethys && \
-    tethys install --no-db-sync"
+RUN cd ${TETHYS_HOME}/apps/tethysapp-thredds_tutorial && \
+    tethys install --no-db-sync
 
 #########
 # PORTS #
