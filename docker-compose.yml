@@ -30,7 +30,7 @@ services:
     image: redis:latest
     restart: always
     networks:
-      - "internal"
+      - "external"
     ports:
       - "6379:6379"
   web:
@@ -50,7 +50,7 @@ services:
       - ./env/web.env
     volumes:
       - ./data/tethys:/var/lib/tethys_persist
-      - ./keys/gee:/var/lib/tethys/keys
+      - ./keys:/var/lib/tethys/keys
       - ./logs/tethys:/var/log/tethys
 networks:
   internal:

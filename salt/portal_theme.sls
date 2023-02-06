@@ -1,4 +1,3 @@
-{% set CONDA_HOME = salt['environ.get']('CONDA_HOME') %}
 {% set TETHYS_PERSIST = salt['environ.get']('TETHYS_PERSIST') %}
 {% set STATIC_ROOT = salt['environ.get']('STATIC_ROOT') %}
 
@@ -11,17 +10,16 @@ Move_Custom_Theme_Files_to_Static_Root:
 Apply_Custom_Theme:
   cmd.run:
     - name: >
-        . {{ CONDA_HOME }}/bin/activate tethys &&
         tethys site
-        --title "My Custom Portal"
-        --tab-title "My Custom Portal"
-        --library-title "Tools"
+        --site-title "My Custom Portal"
+        --brand-text "My Custom Portal"
+        --apps-library-title "Tools"
         --primary-color "#01200F"
         --secondary-color "#358600"
         --background-color "#ffffff"
-        --logo "/custom_theme/images/leaf-logo.png"
+        --brand-image "/custom_theme/images/leaf-logo.png"
         --favicon "/custom_theme/images/favicon.ico"
-        --copyright "Copyright © 2021 My Organization"
+        --copyright "Copyright © 2023 My Organization"
     - shell: /bin/bash
     - unless: /bin/bash -c "[ -f "{{ TETHYS_PERSIST }}/custom_theme_setup_complete" ];"
 
